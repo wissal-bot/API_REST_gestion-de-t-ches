@@ -42,12 +42,17 @@ if (task) {
 //Ajout d'une tâche
 app.post('/tasks', (req, res) => {
 const newTask = {
-    id: tasks.length + 1,
+    id: nextId ,
+//On incrémente la variable nextId pour avoir un id unique
     description: req.body.description,
 };
+nextId++;
+//On ajoute la nouvelle tâche à la liste des tâches enprenant l'id initialisé à 3 et de l'incrémenter sans prédéfinir l'Id
 tasks.push(newTask);
 res.status(201).json({message : 'Task created',task: newTask});
 })
+//On initialise la variable nextId à 3 car les deux premières tâches sont déjà créées
+let nextId = 3;
 
 //Modification d'une tâche
 //Il va contenir la description de la tâche à modifier
